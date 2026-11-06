@@ -3,6 +3,7 @@ from fastapi import FastAPI
 
 from app.routes.trade_routes import router as trade_router
 
+from app.routes.price_routes import router as price_router
 
 app = FastAPI(
     title="Trade Recorder & PnL Service",
@@ -13,6 +14,7 @@ app = FastAPI(
 
 # Register the trade ingestion endpoint.
 app.include_router(trade_router)
+app.include_router(price_router)
 
 
 @app.get("/")
