@@ -1,22 +1,23 @@
 
 from fastapi import FastAPI
 
+from app.routes.trade_routes import router as trade_router
+
+
 app = FastAPI(
     title="Trade Recorder & PnL Service",
-    description="Backend service for trade ingestion, position management and PnL calculations",
+    description="Backend service for trade ingestion, position tracking and PnL calculation.",
     version="1.0.0"
 )
 
 
+# Register the trade ingestion endpoint.
+app.include_router(trade_router)
+
+
 @app.get("/")
-def root():
+def health_check():
     return {
-        "message": "Trade Recorder & PnL Service is running"
-    }
-
-
-@app.get("/health")
-def health():
-    return {
-        "status": "healthy"
+        "status": "healthy",
+        "service": "Trade Recorder & PnL Service"
     }
